@@ -2,3 +2,5 @@
 Projeto relacionado à matéria Tópicos Avançados 2 - TSI
 
 Desenvolvimento de uma aplicação bancaria com Python
+
+teste...
