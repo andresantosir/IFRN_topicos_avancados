@@ -36,3 +36,14 @@ class Sistema_Banco:
         self.contas[conta_origem].saldo -= valor
         self.contas[conta_destino].saldo += valor
         return f"R$ {valor:.2f} transferidos de {conta_origem} para {conta_destino}."
+
+    def debitar(self, numero_conta, valor):
+        conta = self.contas.get(numero_conta)
+        if not conta:
+            return "Conta não encontrada."
+        if valor <= 0:
+            return "O valor dever ser positivo."
+        if valor > conta.saldo:
+            return "Saldo insuficiente."
+        conta.saldo -= valor
+        return f"R$ {valor:.2f} debitados da conta {numero_conta}."    
