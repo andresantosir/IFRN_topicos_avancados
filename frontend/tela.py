@@ -1,5 +1,5 @@
 import sys
-sys.path.append(r'C:\Users\$user\Desktop\IFRN_topicos_avancados') # altere o caminho da pasta para o seu diretório de trabalho
+sys.path.append(r'C:\Users\andre\Desktop\IFRN_topicos_avancados') # altere o caminho da pasta para o seu diretório de trabalho
 from backend.operacoes import Sistema_Banco
 
 def main():
@@ -21,14 +21,20 @@ def main():
             print(banco.criar_conta(numero_conta))
         elif opcao == "2":
             numero_conta =input("Digite o número da conta que deseja consultar o saldo: ")
+            print(banco.consultar_saldo(numero_conta))
         elif opcao == "3":
             numero_conta =input("Digite o número da conta que deseja creditar valor: ")
             dinheiro = float(input("Digite a quantidade de dinheiro que deseja creditar: "))
+            print(banco.creditar(numero_conta, dinheiro))
         elif opcao == "4":
             numero_conta =input("Digite o número da conta que deseja retirar valor: ")
             dinheiro = float(input("Digite a quantidade de dinheiro que deseja debitar: "))
-        #elif opcao == "5":
-            #numero_conta =input("Digite o número da conta: ")
+            print(banco.debitar(numero_conta, dinheiro))
+        elif opcao == "5":
+            conta_origem = input("Digite o número da conta de origem: ")
+            conta_destino = input("Digite o número da conta de destino: ")
+            dinheiro = float(input("Digite o valor para transferência: "))
+            print(banco.transferir(conta_origem, conta_destino, dinheiro))
         elif opcao == "6":
             print("Encerrando...")
             break
