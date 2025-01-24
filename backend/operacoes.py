@@ -1,4 +1,4 @@
-from backend.conta import Conta, ContaBonus
+from backend.conta import Conta, ContaBonus, ContaPoupanca
 
 class Sistema_Banco:
     
@@ -15,6 +15,12 @@ class Sistema_Banco:
         if numero_conta in self.contas:
             return "Conta já existe."
         self.contas[numero_conta] = ContaBonus(numero_conta)
+        return "Conta criada com sucesso!"
+    
+    def criar_conta_poupanca(self, numero_conta):
+        if numero_conta in self.contas:
+            return "Conta já existe."
+        self.contas[numero_conta] = ContaPoupanca(numero_conta)
         return "Conta criada com sucesso!"
     
     def consultar_saldo(self, numero_conta):
@@ -53,3 +59,11 @@ class Sistema_Banco:
             return "Saldo insuficiente." 
         conta.saldo -= valor
         return f"R$ {valor:.2f} debitados da conta {numero_conta}."    
+    
+    def render_juros(self, numero, taxa):
+            conta = self.contas.get(numero)
+            if not conta:
+                return "Conta não encontrada."
+            if isinstance(conta, ContaPoupanca):
+                return conta.render_juros(taxa)
+            return "Operação disponível apenas para contas poupança."

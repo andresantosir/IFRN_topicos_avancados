@@ -12,8 +12,10 @@ def main():
         print("3. Crédito")
         print("4. Débito")
         print("5. Transferência")
-        print("6. Cadastrar Conta Bônus")
-        print("7. Sair")
+        print("6. Render Juros")
+        print("7. Cadastrar Conta Bônus")
+        print("8. Cadastrar Conta Poupança")
+        print("9. Sair")
         
         opcao = input("Escolha uma opção: ")
         
@@ -42,10 +44,19 @@ def main():
             print(banco.transferir(conta_origem, conta_destino, dinheiro))
             
         elif opcao == "6":
-            numero_conta =input("Digite o número da conta: ")
+            numero_conta = input("Digite o número da conta: ")
+            taxa = input("Digite sua taxa de juros: ")
+            print(banco.render_juros(numero_conta, taxa))
+        
+        elif opcao == "7":
+            numero_conta =input("Digite o número da conta bônus: ")
             print(banco.criar_conta_bonus(numero_conta))
             
-        elif opcao == "7":
+        elif opcao == "8":
+            numero_conta =input("Digite o número da conta poupança: ")
+            print(banco.criar_conta_poupanca(numero_conta))
+        
+        elif opcao == "9":
             print("Encerrando...")
             break
         else:

@@ -21,3 +21,7 @@ class ContaBonus(Conta):
         self.pontos += valor // 200         # 1 ponto para cada R$ 200 recebidos
         self.saldo += valor
         return f"R$ {valor:.2f} recebidos na conta {self.numero_conta}."
+    
+class ContaPoupanca(Conta):
+    def __init__(self, numero_conta, saldo=0):
+        super().__init__(numero_conta, saldo)
