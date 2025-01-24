@@ -1,5 +1,5 @@
 import sys
-sys.path.append(r'C:\Users\andre\Desktop\IFRN_topicos_avancados') # altere o caminho da pasta para o seu diretório de trabalho
+sys.path.append(r'C:\Users\20221148060013\Documents\IFRN_topicos_avancados') # altere o caminho da pasta para o seu diretório de trabalho
 from backend.operacoes import Sistema_Banco
 
 def main():

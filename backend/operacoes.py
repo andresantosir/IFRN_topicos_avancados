@@ -61,9 +61,10 @@ class Sistema_Banco:
         return f"R$ {valor:.2f} debitados da conta {numero_conta}."    
     
     def render_juros(self, numero, taxa):
-            conta = self.contas.get(numero)
+            conta = self.contas.get(numero) 
             if not conta:
                 return "Conta não encontrada."
             if isinstance(conta, ContaPoupanca):
-                return conta.render_juros(taxa)
+                conta.saldo += conta.saldo * taxa
+                return f"R$ {conta.saldo:.2f}" '''conta.render_juros(taxa)'''
             return "Operação disponível apenas para contas poupança."
