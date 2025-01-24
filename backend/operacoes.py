@@ -29,10 +29,10 @@ class Sistema_Banco:
     def transferir(self, conta_origem, conta_destino, valor):
         if conta_origem not in self.contas or conta_destino not in self.contas:
             return "Uma ou ambas as contas não foram encontradas."
-        """ if valor <= 0:
+        if valor <= 0:
             return "O valor deve ser positivo."
         if self.contas[conta_origem].saldo < valor:
-            return "Saldo insuficiente." """
+            return "Saldo insuficiente." 
         self.contas[conta_origem].saldo -= valor
         self.contas[conta_destino].saldo += valor
         return f"R$ {valor:.2f} transferidos de {conta_origem} para {conta_destino}."
@@ -41,9 +41,9 @@ class Sistema_Banco:
         conta = self.contas.get(numero_conta)
         if not conta:
             return "Conta não encontrada."
-        """if valor <= 0:
+        if valor <= 0:
             return "O valor dever ser positivo."
         if valor > conta.saldo:
-            return "Saldo insuficiente." """
+            return "Saldo insuficiente." 
         conta.saldo -= valor
         return f"R$ {valor:.2f} debitados da conta {numero_conta}."    
