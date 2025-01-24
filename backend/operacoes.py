@@ -22,7 +22,7 @@ class Sistema_Banco:
         if not conta:
             return "Conta não encontrada."
         if valor <= 0:
-            return "O valor deve ser positivo."
+            return "O valor não pode ser negativo, deve ser positivo."
         conta.saldo += valor
         return f"R$ {valor:.2f} creditados na conta {numero_conta}."
     
