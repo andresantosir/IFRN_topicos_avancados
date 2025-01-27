@@ -1,5 +1,5 @@
 import sys
-sys.path.append(r'C:\Users\20221148060013\Documents\IFRN_topicos_avancados') # altere o caminho da pasta para o seu diretório de trabalho
+sys.path.append(r'C:\Users\andre\Desktop\IFRN_topicos_avancados') # altere o caminho da pasta para o seu diretório de trabalho
 from backend.operacoes import Sistema_Banco
 
 def main():
@@ -44,8 +44,8 @@ def main():
             print(banco.transferir(conta_origem, conta_destino, dinheiro))
             
         elif opcao == "6":
-            numero_conta = input("Digite o número da conta: ")
-            taxa = input("Digite sua taxa de juros: ")
+            numero_conta = int(input("Digite o número da conta: "))
+            taxa = float(input("Informe a taxa de juros (exemplo: 5 para 5%): "))
             print(banco.render_juros(numero_conta, taxa))
         
         elif opcao == "7":
