@@ -26,3 +26,7 @@ class ContaPoupanca(Conta):
     def __init__(self, numero_conta, saldo=0):
         super().__init__(numero_conta, saldo)
         
+    def render_juros(self, taxa): #Metodo render Juros encapsulado dentro da classe
+        self.saldo += self.saldo * (taxa / 100)
+        return f"\n Novo saldo após rendimento: R$ {self.saldo:.2f}"
+        
