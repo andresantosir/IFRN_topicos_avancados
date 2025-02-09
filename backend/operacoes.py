@@ -5,10 +5,10 @@ class Sistema_Banco:
     def __init__(self):
         self.contas = {}    # Inicia um vetor chamado "contas"
         
-    def criar_conta(self, numero_conta):
+    def criar_conta(self, numero_conta, valor):
         if numero_conta in self.contas:
             return "\n Conta já existe."
-        self.contas[numero_conta] = Conta(numero_conta)
+        self.contas[numero_conta] = Conta(numero_conta, valor)
         return "\n Conta criada com sucesso!"
     
     def criar_conta_bonus(self, numero_conta):
