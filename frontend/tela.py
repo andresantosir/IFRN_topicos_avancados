@@ -21,7 +21,8 @@ def main():
         
         if opcao == "1":
             numero_conta =input("Digite o número da conta: ")
-            print(banco.criar_conta(numero_conta))
+            dinheiro = float(input("Digite a quantidade de dinheiro que deseja creditar: "))
+            print(banco.criar_conta(numero_conta, dinheiro))
             
         elif opcao == "2":
             numero_conta =input("Digite o número da conta que deseja consultar o saldo: ")
