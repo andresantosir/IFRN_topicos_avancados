@@ -15,13 +15,13 @@ class Sistema_Banco:
         if numero_conta in self.contas:
             return "\n Conta já existe."
         self.contas[numero_conta] = ContaBonus(numero_conta)
-        return "\n Conta criada com sucesso!"
+        return "\n Conta Bonus criada com sucesso!"
     
-    def criar_conta_poupanca(self, numero_conta):
+    def criar_conta_poupanca(self, numero_conta,valor):
         if numero_conta in self.contas:
             return "\n Conta já existe."
-        self.contas[numero_conta] = ContaPoupanca(numero_conta)
-        return "\n Conta criada com sucesso!"
+        self.contas[numero_conta] = ContaPoupanca(numero_conta,valor) 
+        return "\n Conta Poupanca criada com sucesso!"
     
     def consultar_saldo(self, numero_conta):
         conta = self.contas.get(numero_conta)

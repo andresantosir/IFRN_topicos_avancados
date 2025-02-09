@@ -1,5 +1,5 @@
 import sys
-sys.path.append(r'C:\Users\andre\Desktop\IFRN_topicos_avancados') # altere o caminho da pasta para o seu diretório de trabalho
+sys.path.append(r'C:\Users\Alycson Moreira\Documents\IFRN\Topicos Avancados 2\Projeto\IFRN_topicos_avancados') # altere o caminho da pasta para o seu diretório de trabalho
 from backend.operacoes import Sistema_Banco
 
 def main():
@@ -54,7 +54,8 @@ def main():
             
         elif opcao == "8":
             numero_conta =input("Digite o número da conta poupança: ")
-            print(banco.criar_conta_poupanca(numero_conta))
+            dinheiro = float(input("Digite a quantidade de dinheiro que deseja creditar na conta poupança: "))
+            print(banco.criar_conta_poupanca(numero_conta, dinheiro))
         
         elif opcao == "9":
             print("Encerrando...")
