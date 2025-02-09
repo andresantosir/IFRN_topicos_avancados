@@ -18,7 +18,7 @@ class ContaBonus(Conta):
         return resultado
 
     def receber_transferencia(self, valor):
-        self.pontos += valor // 200         # 1 ponto para cada R$ 200 recebidos
+        self.pontos += valor // 150         # 1 ponto para cada R$ 200 recebidos
         self.saldo += valor
         return f"R$ {valor:.2f} recebidos na conta {self.numero_conta}."
     
