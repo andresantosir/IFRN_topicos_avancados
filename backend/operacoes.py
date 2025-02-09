@@ -5,10 +5,10 @@ class Sistema_Banco:
     def __init__(self):
         self.contas = {}    # Inicia um vetor chamado "contas"
         
-    def criar_conta(self, numero_conta):
+    def criar_conta(self, numero_conta, valor):
         if numero_conta in self.contas:
             return "\n Conta já existe."
-        self.contas[numero_conta] = Conta(numero_conta)
+        self.contas[numero_conta] = Conta(numero_conta, valor)
         return "\n Conta criada com sucesso!"
     
     def criar_conta_bonus(self, numero_conta):
@@ -34,29 +34,17 @@ class Sistema_Banco:
         if not conta:
             return "\n Conta não encontrada."
         if valor <= 0:
-<<<<<<< HEAD
             return "O valor não pode ser negativo, deve ser positivo."
-=======
-            return "\n O valor deve ser positivo."
->>>>>>> feature-branches
         conta.saldo += valor
         return f"\n R$ {valor:.2f} creditados na conta {numero_conta}."
     
     def transferir(self, conta_origem, conta_destino, valor):
         if conta_origem not in self.contas or conta_destino not in self.contas:
-<<<<<<< HEAD
             return "Uma ou ambas as contas não foram encontradas."
         if valor <= 0:
             return "O valor deve ser positivo."
         if self.contas[conta_origem].saldo < valor:
             return "Saldo insuficiente." 
-=======
-            return "\n Uma ou ambas as contas não foram encontradas."
-        if valor <= 0:
-            return "\n O valor deve ser positivo."
-        if self.contas[conta_origem].saldo < valor:
-            return "\n Saldo insuficiente." 
->>>>>>> feature-branches
         self.contas[conta_origem].saldo -= valor
         self.contas[conta_destino].saldo += valor
         return f"\n R$ {valor:.2f} transferidos de {conta_origem} para {conta_destino}."
@@ -64,19 +52,11 @@ class Sistema_Banco:
     def debitar(self, numero_conta, valor):
         conta = self.contas.get(numero_conta)
         if not conta:
-<<<<<<< HEAD
             return "Conta não encontrada."
         if valor <= 0:
             return "O valor dever ser positivo."
         if valor > conta.saldo:
             return "Saldo insuficiente." 
-=======
-            return "\n Conta não encontrada."
-        if valor <= 0:
-            return "\n O valor dever ser positivo."
-        if valor > conta.saldo:
-            return "\n Saldo insuficiente." 
->>>>>>> feature-branches
         conta.saldo -= valor
         return f"\n R$ {valor:.2f} debitados da conta {numero_conta}."    
     
