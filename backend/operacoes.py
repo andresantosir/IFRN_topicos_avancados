@@ -68,3 +68,16 @@ class Sistema_Banco:
         if isinstance(conta, ContaPoupanca):
             return conta.render_juros(taxa)
         return "\n Operação disponível apenas para contas poupança."
+
+    def consultar_dados_conta(self, numero_conta):
+        conta = self.contas.get(numero_conta)
+        if not conta:
+            return "\n Conta não encontrada."
+
+        tipo_conta = type(conta).__name__
+        dados_conta = f"\n Tipo: {tipo_conta}\n Número: {conta.numero_conta}\n Saldo: R$ {conta.saldo:.2f}"
+
+        if isinstance(conta, ContaBonus):
+            dados_conta += f"\n Bônus: {conta.pontos} pontos"
+
+        return dados_conta

@@ -1,5 +1,5 @@
 import sys
-sys.path.append(r'C:\Users\Alycson Moreira\Documents\IFRN\Topicos Avancados 2\Projeto\IFRN_topicos_avancados') # altere o caminho da pasta para o seu diretório de trabalho
+sys.path.append(r'/home/oem/Área de trabalho/IFRN_topicos_avancados') # altere o caminho da pasta para o seu diretório de trabalho
 from backend.operacoes import Sistema_Banco
 
 def main():
@@ -15,7 +15,8 @@ def main():
         print("6. Render Juros")
         print("7. Cadastrar Conta Bônus")
         print("8. Cadastrar Conta Poupança")
-        print("9. Sair")
+        print("9. Consultar dados de conta")
+        print("10. Sair")
         
         opcao = input("Escolha uma opção: ")
         
@@ -57,6 +58,11 @@ def main():
             print(banco.criar_conta_poupanca(numero_conta))
         
         elif opcao == "9":
+            numero_conta = input("Digite o número da conta para consultar os dados: ")
+            print(banco.consultar_dados_conta(numero_conta))
+
+
+        elif opcao == "10":
             print("Encerrando...")
             break
         else:
