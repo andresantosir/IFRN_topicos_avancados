@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Bancário</title>
+    <style>
+        ul{
+            list-style-type: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #formCadastro {
+            display: none; /* Escondido inicialmente */
+        }
+    </style>
+</head>
+<body>
+    <h1>========== SISTEMA BANCÁRIO ==========</h1>
+    <h2>Escolha uma Opção:</h2>
+    
+    <!-- Lista de opções -->
+    <ul id="menuOpcoes">
+        <li><button onclick="mostrarFormulario()">Cadastrar Conta</button></li>
+        <li><button>Consultar Saldo</button></li>
+        <li><button>Crédito</button></li>
+        <li><button>Débito</button></li>
+        <li><button>Transferência</button></li>
+        <li><button>Render Juros</button></li>
+        <li><button>Cadastrar Conta Bônus</button></li>
+        <li><button>Cadastrar Conta Poupança</button></li>
+        <li><button>Consultar dados de conta</button></li>
+        <li><button>Sair</button></li>
+    </ul>
+
+    <!-- Formulário de Cadastro (Oculto Inicialmente) -->
+    <div id="formCadastro">
+        <h2>Cadastrar Conta</h2>
+        <label for="numeroConta">Número da Conta:</label>
+        <input type="text" id="numeroConta">
+        <br><br>
+        <button onclick="cadastrarConta()">Confirmar Cadastro</button>
+        <button onclick="voltarMenu()">Voltar</button>
+        <div id="mensagem"></div>
+    </div>
+
+    <script>
+
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     // Verifica a URL ao carregar a página
+        //     if (window.location.pathname === "/cadastrar_conta") {
+        //         mostrarFormulario();
+        //     } else {
+        //         voltarMenu();
+        //     }
+        // });
+
+
+        function mostrarFormulario() {
+        document.getElementById('menuOpcoes').style.display = 'none';
+        document.getElementById('formCadastro').style.display = 'block';
+        document.getElementById('mensagem').innerText = '';
+
+        // Atualiza a URL sem recarregar a página
+        history.pushState({}, '', '/banco/conta');
+    }
+
+        function voltarMenu() {
+            document.getElementById('menuOpcoes').style.display = 'block'; // Mostra opções
+            document.getElementById('formCadastro').style.display = 'none'; // Oculta formulário
+
+            // Voltar a URL para home sem recarregar
+            history.pushState({}, '', '/');
+        }
+
+        // Captura o evento do botão "Voltar" do navegador
+        window.addEventListener('popstate', function () {
+            if (window.location.pathname === "/banco/conta") {
+                mostrarFormulario();
+            } else {
+                voltarMenu();
+            }
+        });
+
+        async function cadastrarConta() {
+            const numeroConta = document.getElementById('numeroConta').value;
+            if (!numeroConta) {
+                alert("Por favor, insira um número de conta!");
+                return;
+            }
+
+            const resposta = await fetch('/banco/conta', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ numero_conta: numeroConta })
+            });
+
+            const resultado = await resposta.json();
+            document.getElementById('mensagem').innerText = resultado.mensagem || resultado.erro;
+
+            if (resposta.ok) {
+                setTimeout(voltarMenu, 3000); // Volta ao menu após 3s se sucesso
+            }
+        }
+    </script>
+</body>
+</html>
