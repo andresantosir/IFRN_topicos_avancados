@@ -53,7 +53,18 @@ button:active {
     transform: scale(0.95);
 }
 
-#formCadastro {
+#formCadastroConta {
+    display: none;
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto;
+    color: white;
+}
+
+#formConsultaSaldo{
     display: none;
     background-color: #2a2a2a;
     padding: 20px;
