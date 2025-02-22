@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Bancário</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        ul{
+            list-style-type: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+       
+    </style>
+</head>
+<body>
+    <h1> SISTEMA BANCÁRIO </h1>
+    <h2>Escolha uma Opção:</h2>
+    
+    <!-- Lista de opções -->
+    <ul id="menuOpcoes">
+        <li><button onclick="mostrarFormulario()">Cadastrar Conta</button></li>
+        <li><button onclick="mostraconsultarSaldo()">Consultar Saldo</button></li>
+        <li><button onclick="credito()">Crédito</button></li>
+        <li><button onclick="debito()">Débito</button></li>
+        <li><button onclick="transferencia()">Transferência</button></li>
+        <li><button onclick="renderJuros()">Render Juros</button></li>
+        <li><button onclick="cadastrarContaBonus()">Cadastrar Conta Bônus</button></li>
+        <li><button onclick="cadastrarContaPoupanca()">Cadastrar Conta Poupança</button></li>
+        <li><button onclick="consultarDadosConta()">Consultar Dados de Conta</button></li>
+        <li><button>Sair</button></li>
+    </ul>
+
+    <!-- Formulário de Cadastro (Oculto Inicialmente) -->
+    <div id="formCadastroConta">
+        <h2>Cadastrar Conta</h2>
+        <label for="numeroConta">Número da Conta:</label>
+        <input type="text" id="numeroConta">
+        <br><br>
+        <button onclick="cadastrarConta()">Confirmar Cadastro</button>
+        <button onclick="voltarMenu()">Voltar</button>
+        <div id="mensagem"></div>
+    </div>
+
+    <div id="formConsultaSaldo">
+        <h2>Consultar Saldo</h2>
+        <label for="numeroContaSaldo">Número da Conta:</label>
+        <input type="text" id="numeroContaSaldo">
+        <br><br>
+        <button onclick="consultarSaldo()">Consultar</button>
+        <button onclick="voltarMenu()">Voltar</button>
+        <div id="saldo"></div>
+    </div>
+
+    <script>
+
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     // Verifica a URL ao carregar a página
+        //     if (window.location.pathname === "/cadastrar_conta") {
+        //         mostrarFormulario();
+        //     } else {
+        //         voltarMenu();
+        //     }
+        // });
+
+
+        function mostrarFormulario() {
+        document.getElementById('menuOpcoes').style.display = 'none';
+        document.getElementById('formCadastroConta').style.display = 'block';
+        document.getElementById('mensagem').innerText = '';
+
+        // Atualiza a URL sem recarregar a página
+        history.pushState({}, '', '/banco/conta');
+    }
+        function mostraconsultarSaldo(){
+            document.getElementById('menuOpcoes').style.display = 'none';
+            document.getElementById('formConsultaSaldo').style.display = 'block';
+            document.getElementById('saldo').innerText = '';
+            
+
+        // Atualiza a URL sem recarregar
+        history.pushState({}, '', '/consultar_saldo');
+    }
+
+    async function cadastrarConta() {
+            const numeroConta = document.getElementById('numeroConta').value;
+            console.log(numeroConta);
+            
+            if (!numeroConta) {
+                alert("Por favor, insira um número de conta!");
+                return;
+            }
+
+            const resposta = await fetch('/banco/conta', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ numero_conta: numeroConta })
+            });
+
+            const resultado = await resposta.json();
+            document.getElementById('mensagem').innerText = resultado.mensagem || resultado.erro;
+
+        }
+
+
+    async function consultarSaldo() {
+        const numeroConta = document.getElementById('numeroContaSaldo').value;
+        
+        if (!numeroConta) {
+            alert("Por favor, insira um número de conta!");
+            return;
+        }
+
+        // Atualiza a URL para exibir corretamente o número da conta
+        history.pushState({}, '', `/banco/conta/${numeroConta}/saldo`);
+
+        try {
+            // Faz a requisição GET corretamente passando o número da conta na URL
+            const resposta = await fetch(`/banco/conta/${numeroConta}/saldo`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const resultado = await resposta.json();
+            document.getElementById('saldo').innerText = resultado.mensagem || resultado.erro;
+            
+
+        } catch (error) {
+            console.error("Erro ao consultar saldo:", error);
+            document.getElementById('saldo').innerText = "Erro ao consultar saldo.";
+        }
+    }
+
+
+ 
+
+        function voltarMenu() {
+            document.getElementById('menuOpcoes').style.display = 'block'; // Mostra opções
+            document.getElementById('formCadastroConta').style.display = 'none'; // Oculta formulário
+            document.getElementById('formConsultaSaldo').style.display = 'none';
+
+            // Voltar a URL para home sem recarregar
+            history.pushState({}, '', '/');
+        }
+
+        /* Captura o evento do botão "Voltar" do navegador
+        window.addEventListener('popstate', function () {
+            if (window.location.pathname === "/banco/conta") {
+                mostrarFormulario();
+            } else {
+                voltarMenu();
+            }
+        });*/
+
+        
+    </script>
+</body>
+</html>
