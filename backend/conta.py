@@ -9,13 +9,14 @@ class Conta:
 class ContaBonus(Conta):
     def __init__(self, numero_conta, saldo=0):
         super().__init__(numero_conta, saldo)
-        self.pontos = 10                    # Pontuação inicial
+        self.pontos = 10  # Pontuação inicial
 
     def depositar(self, valor):
-        resultado = super().depositar(valor)
-        if "depositados" in resultado:
-            self.pontos += valor // 100     # 1 ponto para cada R$ 100 depositados
-        return resultado
+        if valor <= 0:
+            return "Valor de depósito deve ser positivo."
+        self.saldo += valor
+        self.pontos += valor // 100  # 1 ponto para cada R$ 100 depositados
+        return f"R$ {valor:.2f} depositados com sucesso. Pontos acumulados: {self.pontos}."
 
     def receber_transferencia(self, valor):
         self.pontos += valor // 200         # 1 ponto para cada R$ 200 recebidos
