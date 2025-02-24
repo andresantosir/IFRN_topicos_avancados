@@ -1,0 +1,159 @@
+{
+    "api": {
+      "base_url": "/banco",
+      "endpoints": [
+        {
+          "method": "POST",
+          "path": "/conta",
+          "description": "Cria uma nova conta bancária",
+          "request_body": {
+            "numero_conta": "string (obrigatório)"
+          },
+          "responses": {
+            "201": {
+              "mensagem": "Conta criada com sucesso!",
+              "conta": "número da conta"
+            },
+            "400": {
+              "erro": "Número da conta é obrigatório ou já existe"
+            }
+          }
+        },
+
+        {
+          "method": "GET",
+          "path": "/conta/<numero_conta>/saldo",
+          "description": "Consulta o saldo de uma conta",
+          "parameters": {
+            "numero_conta": "string (path)"
+          },
+          "responses": {
+            "200": {
+              "mensagem": "Saldo atual em formato monetário"
+            },
+            "404": {
+              "erro": "Conta não encontrada"
+            }
+          }
+        },
+
+        {
+          "method": "GET",
+          "path": "/conta",
+          "description": "Consulta detalhes de uma conta (tipo, saldo, pontos de bônus)",
+          "parameters": {
+            "numero": "string (query)"
+          },
+
+          "responses": {
+            "200": {
+              "tipo": "Conta/ContaBonus/ContaPoupanca",
+              "numero": "número da conta",
+              "saldo": "float",
+              "bonus": "int (apenas para ContaBonus)"
+            },
+            "404": {
+              "erro": "Conta não encontrada"
+            }
+          }
+        },
+
+        {
+          "method": "PUT",
+          "path": "/conta/<numero>/saldo",
+          "description": "Credita valor em uma conta",
+          "parameters": {
+            "numero": "string (path)",
+            "valor": "float (body)"
+          },
+          "responses": {
+            "200": {
+              "mensagem": "Valor creditado com sucesso"
+            },
+            "400": {
+              "erro": "Valor inválido ou conta não encontrada"
+            }
+          }
+        },
+
+        {
+          "method": "PUT",
+          "path": "/conta/<numero>/debito",
+          "description": "Debita valor de uma conta",
+          "parameters": {
+            "numero": "string (path)",
+            "valor": "float (body)"
+          },
+
+          "responses": {
+            "200": {
+              "mensagem": "Valor debitado com sucesso"
+            },
+            "400": {
+              "erro": "Saldo insuficiente ou valor inválido"
+            }
+          }
+        },
+
+        {
+          "method": "PUT",
+          "path": "/conta/transferencia",
+          "description": "Transfere valor entre contas",
+          "request_body": {
+            "from": "string (conta origem)",
+            "to": "string (conta destino)",
+            "amount": "float"
+          },
+
+          "responses": {
+            "200": {
+              "mensagem": "Transferência realizada"
+            },
+            "400": {
+              "erro": "Saldo insuficiente, valor inválido ou contas não encontradas"
+            }
+          }
+        },
+
+        {
+          "method": "PUT",
+          "path": "/conta/rendimento",
+          "description": "Aplica juros a uma conta poupança",
+          "request_body": {
+            "numero": "string",
+            "taxa": "float"
+          },
+          "responses": {
+            "200": {
+              "mensagem": "Rendimento aplicado"
+            },
+            "400": {
+              "erro": "Conta não é poupança ou não existe"
+            }
+          }
+        }
+      ],
+
+      "data_models": {
+        "Conta": {
+          "numero_conta": "string",
+          "saldo": "float"
+        },
+        "ContaBonus": {
+          "herda_de": "Conta",
+          "pontos": "int (calculado por depósitos/transferências)"
+        },
+        "ContaPoupanca": {
+          "herda_de": "Conta",
+          "render_juros(taxa)": "aplica taxa percentual ao saldo"
+        }
+
+      },
+      "status_codes": {
+        "200": "Operação bem-sucedida",
+        "201": "Recurso criado",
+        "400": "Requisição inválida",
+        "404": "Recurso não encontrado"
+      }
+    }
+}
