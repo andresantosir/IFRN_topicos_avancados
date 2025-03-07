@@ -18,6 +18,10 @@ banco = {}
 def home(): # Página inicial.
     return render_template('index.html')
 
+@app.route("/banco/contas", methods=["GET"])
+def listar_contas():
+    return jsonify(contas)
+
 # API para cadastrar conta
 @app.route('/banco/conta', methods=['POST'])
 def cadastrar_conta(): # Cadastro de uma nova conta bancária.
@@ -212,4 +216,4 @@ def consultar_conta():
 #   return
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=True)

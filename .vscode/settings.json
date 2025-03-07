@@ -2,6 +2,7 @@
     "git.ignoreLimitWarning": true,
     "cSpell.words": [
         "Conta",
-        "jsonify"
+        "jsonify",
+        "venv"
     ]
 }

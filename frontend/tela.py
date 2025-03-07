@@ -1,6 +1,6 @@
 import sys
-sys.path.append(r'C:\Users\20211148060031\Documents\TOPICOS_AVANCADOS-2\IFRN_topicos_avancados')
-#sys.path.append(r'C:\Users\Jonathan_Leo\Documents\IFRN_2021-2025_CONTEÚDO\DISCIPLINAS_DO_4º_E_6º_PERIODOS\TOPICOS_AVANCADOS2\IFRN_topicos_avancados')
+#sys.path.append(r'C:\Users\20211148060031\Documents\TOPICOS_AVANCADOS-2\IFRN_topicos_avancados')
+sys.path.append(r'C:\ARQUIVOS EM GERAL\IFRN_2023_DISCIPLINAS\DISCIPLINAS_4_6_PERIODOS\TOPICOS_AVANCADOS-02\PROJETOS_E_ATIVIDADES\IFRN_topicos_avancados')
 # sys.path.append(r'C:\Users\Alycson Moreira\Documents\IFRN\Topicos Avancados 2\Projeto\IFRN_topicos_avancados') # altere o caminho da pasta para o seu diretório de trabalho
 from backend.operacoes import Sistema_Banco
 
