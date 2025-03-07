@@ -24,15 +24,15 @@ jobs:
         run: |
           python -m py_compile backend/*.py  # Verificação sintática no diretório backend
 
-      - name: Static Analysis (Lint)
-        run: |
-          pip install pylint
-          pylint backend/ --fail-under=7.0  # Exemplo com Pylint (nota mínima 7)
-
       - name: Run Unit Tests
         run: |
           pip install pytest
           pytest tests/ -v  # Supondo que os testes estão em /tests
+
+      - name: Static Analysis (Lint)
+        run: |
+          pip install pylint
+          pylint backend/ --fail-under=7.0  # Exemplo com Pylint (nota mínima 7)    
 
       - name: Create Package
         run: |
@@ -45,3 +45,5 @@ jobs:
           files: ${{ env.PACKAGE_PATH }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
