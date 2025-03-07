@@ -22,12 +22,12 @@ jobs:
 
       - name: Syntax Check (Build)
         run: |
-          python -m py_compile src/*.py  # Verificação sintática básica
+          python -m py_compile backend/*.py  # Verificação sintática no diretório backend
 
       - name: Static Analysis (Lint)
         run: |
           pip install pylint
-          pylint src/ --fail-under=7.0  # Exemplo com Pylint (nota mínima 7)
+          pylint backend/ --fail-under=7.0  # Exemplo com Pylint (nota mínima 7)
 
       - name: Run Unit Tests
         run: |
