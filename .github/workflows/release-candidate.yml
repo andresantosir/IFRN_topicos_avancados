@@ -2,8 +2,6 @@ name: Release Candidate Pipeline
 
 on:
   push:
-    tags:
-      - 'rc-1.0'
 
 jobs:
   build-and-test:
