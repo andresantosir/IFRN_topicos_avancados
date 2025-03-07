@@ -1,1 +1,49 @@
+name: Release Candidate Pipeline
 
+on:
+  push:
+    tags:
+      - 'rc-1.0'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Supondo que exista um arquivo de dependências
+
+      - name: Syntax Check (Build)
+        run: |
+          python -m py_compile src/*.py  # Verificação sintática básica
+
+      - name: Static Analysis (Lint)
+        run: |
+          pip install pylint
+          pylint src/ --fail-under=7.0  # Exemplo com Pylint (nota mínima 7)
+
+      - name: Run Unit Tests
+        run: |
+          pip install pytest
+          pytest tests/ -v  # Supondo que os testes estão em /tests
+
+      - name: Create Package
+        run: |
+          zip -r bancario-rc-${{ github.ref_name }}.zip src/ requirements.txt  # Cria um ZIP
+          echo "PACKAGE_PATH=bancario-rc-${{ github.ref_name }}.zip" >> $GITHUB_ENV
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ env.PACKAGE_PATH }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
